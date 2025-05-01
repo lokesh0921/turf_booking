@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
-
+const pool = require("../lib/db"); // ✅ Fix this line
+const generateToken = require("../lib/util");
 // imort pool form dbconnection file
 //
 
@@ -38,7 +39,7 @@ router.post("/signup", async (req, res) => {
       [username, email, hashedPassword]
     );
 
-    const newUserId = result.inserId;
+    const newUserId = result.insertId;
 
     generateToken(newUserId, res);
 
